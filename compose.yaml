@@ -1,9 +1,26 @@
 services:
-  postgres:
-    image: 'postgres:latest'
-    environment:
-      - 'POSTGRES_DB=mydatabase'
-      - 'POSTGRES_PASSWORD=secret'
-      - 'POSTGRES_USER=myuser'
+  nginx:
+    image: nginx:1.27
+    container_name: nginx
+    restart: no
     ports:
-      - '5432'
+      - 80:80
+    networks:
+      - files-handler
+
+  postgres:
+    image: postgres:16.3-bullseye
+    container_name: postgres
+    environment:
+      - 'POSTGRES_DB=files-handler'
+      - 'POSTGRES_PASSWORD=password'
+      - 'POSTGRES_USER=admin'
+    networks:
+      - files-handler
+    ports:
+      - '5432:5432'
+
+networks:
+  files-handler:
+    external: false
+    name: files-handler
