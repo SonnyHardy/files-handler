@@ -5,6 +5,9 @@ services:
     restart: no
     ports:
       - 80:80
+    volumes:
+      - ../files:/tmp/files
+      - ./files.conf:/etc/nginx/conf.d/files.conf
     networks:
       - files-handler
 

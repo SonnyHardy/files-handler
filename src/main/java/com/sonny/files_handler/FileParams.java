@@ -19,5 +19,6 @@ public class FileParams {
     private int id;
     private String name;
     private String temp;
+    @Transient
     private String content;
 }
